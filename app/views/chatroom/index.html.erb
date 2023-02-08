@@ -1,39 +1,58 @@
 <%= render 'shared/headicon_home' %>
+
 <div class="ui container">
 <div class="ui two column grid">
 
-<div class="ten wide column">
-	<div class="ui fluid raised card chatbox">
-	  <div class="content">
-		<div class="ui feed">
-  <h4 class="ui header">Chatbox</h4>
 
-  <div class="event">
+<div class="nine wide column">
+	<div class="ui fluid raised card chatbox">
+	<div class="content" id="messages">
+
+                                          <%# below this  %>
+
+  <%# @messages.each do |message| %>
+  <%# <div class="event">
     <div class="content">
       <div class="summary">
+         <a><%= message.user.username </a>:
+		   <%#= message.body<br>
+      <%# </div>
+    </div> %>
+  <%# </div> %>
+   	<%# end %>
+                                          <%# or %>
 
-		<% @messages.each do |message| %>
-         <a><%= message.user.username%> </a>:
-		   <%= message.body%><br>
-		<% end %>
 
+        <%= turbo_stream_from "messages" %>
+
+		<div class="ui feed" id="message-container">
+	       <%= render @messages %>
+
+	    </div>
+
+
+                                       <%# above this %>
+
+
+
+	<%# here we can render using this instance variable since we have view folder named its resource Message model
+	and also message partial file in it.%>
+
+
+</div>
+
+ <div class="extra content">
+        <%= form_for(@message, html: {class: "ui reply form", role: "form"}, url: root_path, remote: true) do |f| %>
+          <div class="field">
+            <div class="ui fluid icon input">
+              <%= f.text_field :body, autocomplete: "off" %>
+              <%= f.button '<i class="bordered inverted orange edit icon"></i>'.html_safe, id:"send_button" %>
+            </div>
+          </div>
+        <% end %>
       </div>
-    </div>
-  </div>
-</div>
 
-</div>
 
-<div class="extra content">
-    <form class="ui reply form">
-     <div class="field">
-       <div class="ui fluid icon input ">
-	      <input type="text" placeholder="say something..">
-          <i class="bordered inverted orange edit icon"></i>
-       </div>
-     </div>
-    </form>
-</div>
 </div>
 </div>
 
@@ -57,3 +76,5 @@
 
 </div>
 </div>
+
+

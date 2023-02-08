@@ -1,25 +1,30 @@
-<h1>Sessions#new</h1>
+<%# <h1>Sessions#new</h1> %>
 <%= render 'shared/headicon_login' %>
 <div class="ui placeholder segment container">
   <div class="ui two column very relaxed stackable grid">
     <div class="column">
-      <div class="ui form">
+      <%= form_with(scope: :session, url: login_path) do |form| %>
+
         <div class="field">
-          <label>Username</label>
+			<%= form.label :username, "Username" %>
           <div class="ui left icon input">
-            <input type="text" placeholder="Username">
+            <%= form.text_field :username, placeholder:"Username"%>
             <i class="user icon"></i>
           </div>
         </div>
         <div class="field">
-          <label>Password</label>
+			<%= form.label :password, "Password" %>
           <div class="ui left icon input">
-            <input type="password">
+            <%= form.password_field :password%>
             <i class="lock icon"></i>
           </div>
         </div>
-        <div class="ui blue submit button">Login</div>
-      </div>
+        <div ><br>
+			<%= form.submit "Login", class:"ui blue submit button"%>
+		</div>
+
+
+	<% end %>
     </div>
     <div class="middle aligned column">
       <div class="ui big animated fade button">

@@ -23,10 +23,35 @@
 
   <body>
 <%= render partial: 'shared/menubar' %>
+<%= render partial: 'shared/flash' %>
 
     <%= yield %>
+	<br><br>
   <script>
-    $(".ui.dropdown").dropdown();
+ // All js functions are in javascript/application.js file
+
+  // This is for auto scroll in chatbox
+	$('#messages').scrollTop($('#messages')[0].scrollHeight);
+
+
+//    $('#message_body').on('keydown', function(e){
+//    if ( e.keyCode == 13 ){
+//      $ ('button').click();
+//    }
+//    })
+
+// This is for dropdown in menubar
+	$(".ui.dropdown").dropdown();
+
+   // This is used to close flash messages
+
+		$('.message .close')
+		.on('click', function() {
+			$(this)
+			  .closest('.message')
+			  .transition('fade');
+			 });
+
   </script>
   </body>
 </html>

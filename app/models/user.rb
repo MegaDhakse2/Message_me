@@ -16,7 +16,7 @@ class User < ApplicationRecord
               case_sensitive: true
             },
             length: {
-              minimum: 5,
+              minimum: 4,
               maximum: 15
             }
 
